@@ -1,0 +1,359 @@
+@charset "utf-8";
+/*clear*/
+html,ul,ol,h1,h2,h3,h4,h5,h6,body{
+	padding:0px;
+	margin:0px;
+}
+html,body{
+	height: 100%;
+	width:100%;
+	background-color: #f0f0f0;
+}
+
+ul,ol{
+	list-style: none;
+}
+
+h3{
+	font-size: 14px;
+}
+
+/* common widget */
+input[type=password],input[type=text],input[type=number],input[type=email]{	
+	line-height: 20px;
+	padding:2px;
+    border:1px solid rgb(180,180,180);
+}
+select{
+	height:26px;
+	border:1px solid rgb(180,180,180);
+}
+
+input.short,input.port{
+	width:50px !important;
+}
+input.width-long{
+	width:300px !important;
+}
+input.width-normal{
+	width:200px !important;
+}
+select.width-normal{
+	width:206px !important;
+}
+select.width-long{
+	width:306px !important;
+}
+
+table.data{
+	border-collapse:collapse;
+	width:100%;
+}
+
+/* common table data style*/
+.data thead tr{
+    filter: progid:DXImageTransform.Microsoft.Gradient(gradientTpye=0,startColorStr=#ffffff,endColorStr=#e6e6e6);
+    background: -moz-linear-gradient(top,#ffffff,#e6e6e6); 
+    background: -webkit-gradient(linear,0% 0%,0% 100%,from(#ffffff),to(#e6e6e6));
+} 
+.data tr{
+	height:30px;	
+}
+.data tr:nth-child(even){
+	background-color: rgb(242,242,242);
+}
+/*兼容性  thead tr无效*/
+.data th{
+	border-top:1px solid rgb(205,205,205);
+}
+.data tr{
+	border-left:1px solid rgb(205,205,205);
+	border-top:1px solid rgb(205,205,205);
+}
+.data td, .data th{
+	border-right:1px solid rgb(205,205,205);
+	border-bottom:1px solid rgb(205,205,205);
+	text-align:center;
+}
+/*.tab-form tr td:first-child{text-align:right}
+.tab-form tr td:nth-child(2){text-align:left}*/
+.tab-form{
+	width:100%;
+	table-layout: fixed;
+}
+.tab-form tr td:nth-child(even){text-align:left}
+.tab-form tr td:nth-child(odd){text-align:right; padding-right: 5px;}
+.tab-form-io tr td:first-child{
+	word-break:keep-all;/* 不换行 */
+	white-space:nowrap;/* 不换行 */
+	overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+	text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用*/
+}
+.tab-form tr td:first-child{
+	width:120px;
+    word-break:keep-all;/* 不换行 */  
+    white-space:nowrap;/* 不换行 */  
+    overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */  
+    text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用*/  
+}
+
+/* workStatus */
+
+.work_status_icon_title{
+	height:25px;
+	line-height:25px;
+    vertical-align:middle;
+    text-align:center;   
+    
+    float:top;
+    border-width: 1px;
+    border-style:solid;
+    border-right-style:none;
+    border-left-style:none;
+    border-top-style:none;
+    border-bottom-color:rgb(205,205,205);
+    filter: progid:DXImageTransform.Microsoft.Gradient(gradientTpye=0,startColorStr=#ffffff,endColorStr=#e6e6e6);
+    background: -moz-linear-gradient(top,#ffffff,#e6e6e6);
+    background: -webkit-gradient(linear,0% 0%,0% 100%,from(#ffffff),to(#e6e6e6));
+}
+
+.work_status_icon_box,.work_status_icon_title,.work_status_icon_content,.work_status_icon_text{
+	width:205px; 
+}
+
+.work_status_icon_box{
+	height:158px;
+	border:1px solid rgb(190,190,190);
+	float:left;
+	margin-right: 53px;	
+}
+.work_status_icon_text{
+	height: 30px; line-height: 30px; text-align: center;font-family: Arial;
+}
+
+/*runninglog*/
+#download_long a{
+	color: #000000!important;
+}
+
+/* ioconfig */
+.data_stream_title{
+	font-weight: bold;
+	margin-bottom:5px;
+}
+.dataStreamParam{
+	margin-left:20px;
+	margin-bottom:10px;
+}
+
+
+/*container*/
+.main_wrapper{
+	width:745px;
+	height:720px;
+    font-size:14px;
+	line-height:18px;
+	padding-left:10px;
+    font-family: Arial,Helvetica,sans-serif;
+}
+.content_wrapper{
+	height: 740px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+.content_wrapper_scroll{
+	height: 650px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+.title_bar,.content_wrapper{
+	width:740px;
+}
+.title_bar{
+	margin-bottom:10px;
+	height: 40px; 
+    font-family: 微软雅黑, Arial, Helvetica, sans-serif; 
+    border-bottom: 1px solid gray;    
+}
+.title_bar h3{	
+	font-size: 1.4em;	
+	height: 40px;
+    line-height: 40px;
+    color: black;
+    font-weight: bold;	
+}
+
+.box_margin_bottom{
+	margin-bottom:5px;
+}
+.ui-widget-bottom{
+	margin-bottom:5px;
+}
+
+div.ui-widget{
+	padding:0.4em;
+}
+
+.ui-widget-header{
+	padding:0.4em;
+	margin-bottom:5px;
+}
+.white {
+	  padding:0em;
+	  margin-bottom:5px;
+	  background-color: #fff;
+  }
+.grey {
+	background: -moz-linear-gradient(top,#ffffff,#e6e6e6);
+	background: -webkit-gradient(linear,0% 0%,0% 100%,from(#ffffff),to(#e6e6e6));
+}
+
+.ui_wrapper{
+	/*padding:5px;*/
+}
+
+
+/* --------------Start login css-----------------*/
+.lang_banner{
+	line-height:25px;
+	height:25px;
+	width:100%;
+	text-align: right;	
+	color: #57deda;
+	/*background-color: RGB(218, 219, 221);*/
+	margin-bottom: 100px;
+	font-size:12px;
+}
+
+.lang_banner a{
+    color: #ffffff;
+    text-decoration: none;
+    border-bottom: 1px solid #e1e1e1;
+    margin-right: 5px;
+}
+
+.lang_banner a:hover {
+    text-decoration: none;
+}
+
+.ui_container{
+	width: 100%;
+	height:100%;
+	margin: 0 auto; 	
+}
+/*
+#login{
+	margin:0 auto;
+	min-height:250px;
+	width:500px;
+}
+.login_container input:not([type="checkbox"]){
+	width: 92%;
+	margin-top: 4px;
+	padding: 10px 5px 10px 10px;	
+	border: 1px solid rgb(178, 178, 178);
+	-webkit-appearance: textfield;
+	-webkit-box-sizing: content-box;
+	  -moz-box-sizing : content-box;
+	       box-sizing : content-box;
+	-webkit-border-radius: 3px;
+	   -moz-border-radius: 3px;
+	        border-radius: 3px;
+	-webkit-box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
+	   -moz-box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
+	        box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
+	-webkit-transition: all 0.2s linear;
+	   -moz-transition: all 0.2s linear;
+	     -o-transition: all 0.2s linear;
+	        transition: all 0.2s linear;
+}
+.login_container .button input{
+	width: 30%;
+	cursor: pointer;	
+	background: rgb(61, 157, 179);
+	padding: 8px 5px;
+	font-family: 'BebasNeueRegular','Arial Narrow',Arial,sans-serif;
+	color: #fff;
+	font-size: 24px;	
+	border: 1px solid rgb(28, 108, 122);	
+	margin-bottom: 10px;	
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+	-webkit-border-radius: 3px;
+	   -moz-border-radius: 3px;
+	        border-radius: 3px;	
+	-webkit-box-shadow: 0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset,
+	        0px 0px 0px 3px rgb(254, 254, 254),
+	        0px 5px 3px 3px rgb(210, 210, 210);
+	   -moz-box-shadow:0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset,
+	        0px 0px 0px 3px rgb(254, 254, 254),
+	        0px 5px 3px 3px rgb(210, 210, 210);
+	        box-shadow:0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset,
+	        0px 0px 0px 3px rgb(254, 254, 254),
+	        0px 5px 3px 3px rgb(210, 210, 210);
+	-webkit-transition: all 0.2s linear;
+	   -moz-transition: all 0.2s linear;
+	     -o-transition: all 0.2s linear;
+	        transition: all 0.2s linear;
+}
+.login.button,
+.signin.button{
+	text-align: right;
+	margin: 5px 0;
+}
+#login li:nth-child(2),#login li:nth-child(4),#login li:nth-child(5){
+	margin-bottom: 15px;
+}
+.login_container h1{
+    background: -webkit-repeating-linear-gradient(-45deg, 
+	rgb(18, 83, 93) , 
+	rgb(18, 83, 93) 20px, 
+	rgb(64, 111, 118) 20px, 
+	rgb(64, 111, 118) 40px, 
+	rgb(18, 83, 93) 40px);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+.login_container h1:after{
+	content: ' ';
+	display: block;
+	width: 100%;
+	height: 2px;
+	margin-top: 10px;
+	background: -moz-linear-gradient(left, rgba(147,184,189,0) 0%, rgba(147,184,189,0.8) 20%, rgba(147,184,189,1) 53%, rgba(147,184,189,0.8) 79%, rgba(147,184,189,0) 100%); 
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(147,184,189,0)), color-stop(20%,rgba(147,184,189,0.8)), color-stop(53%,rgba(147,184,189,1)), color-stop(79%,rgba(147,184,189,0.8)), color-stop(100%,rgba(147,184,189,0))); 
+	background: -webkit-linear-gradient(left, rgba(147,184,189,0) 0%,rgba(147,184,189,0.8) 20%,rgba(147,184,189,1) 53%,rgba(147,184,189,0.8) 79%,rgba(147,184,189,0) 100%); 
+	background: -o-linear-gradient(left, rgba(147,184,189,0) 0%,rgba(147,184,189,0.8) 20%,rgba(147,184,189,1) 53%,rgba(147,184,189,0.8) 79%,rgba(147,184,189,0) 100%); 
+	background: -ms-linear-gradient(left, rgba(147,184,189,0) 0%,rgba(147,184,189,0.8) 20%,rgba(147,184,189,1) 53%,rgba(147,184,189,0.8) 79%,rgba(147,184,189,0) 100%); 
+	background: linear-gradient(left, rgba(147,184,189,0) 0%,rgba(147,184,189,0.8) 20%,rgba(147,184,189,1) 53%,rgba(147,184,189,0.8) 79%,rgba(147,184,189,0) 100%); 
+}
+.login_container h1{
+	font-size: 48px;
+	color: rgb(6, 106, 117);
+	padding: 2px 0 10px 0;
+	font-family: 'FranchiseRegular','Arial Narrow',Arial,sans-serif;
+	font-weight: bold;
+	text-align: center;
+	padding-bottom: 30px;
+}*/
+/*#login{
+	padding:15px 20px 10px 20px;
+	border: 1px solid rgba(147, 184, 189,0.8);
+	-webkit-box-shadow: 0pt 2px 5px rgba(105, 108, 109,  0.7),	0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
+	   -moz-box-shadow: 0pt 2px 5px rgba(105, 108, 109,  0.7),	0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
+	        box-shadow: 0pt 2px 5px rgba(105, 108, 109,  0.7),	0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
+	-webkit-box-shadow: 5px;
+	-moz-border-radius: 5px;
+		 border-radius: 5px;
+}*/
+/*兼容ie浏览器登陆页面不居中问题*/
+/*.loginforIE{
+	position:absolute;
+	left:expression((body.clientWidth-50)/2.8);
+	top:expression((body.clientHeight-50)/3)");
+}*/
+/*.keeplogin input,
+.keeplogin label{
+	display: inline-block;
+	font-size: 12px;		
+}*/
+/* --------------End login css-----------------*/

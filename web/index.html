@@ -1,0 +1,204 @@
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="/resource/juqery/css/base/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+    <link href="/resource/css/css.css"  rel="stylesheet">
+    <script type="application/javascript" src="/resource/common.js"></script>
+    <script type="application/javascript" src="/resource/juqery/js/jquery-1.8.3.js"></script>
+    <script type="application/javascript" src="/resource/juqery/js/jquery-ui-1.9.2.custom.js"></script>
+  </head>
+  <script type="application/javascript">
+    //请求一次数据，然后存储到js变量中，保证只发送一条请求
+    var datas;
+    jQuery(function() {
+        $.ajax({
+          type: "POST",
+          url: "/doPages",
+          data: "{}",
+          dataType: 'json',
+          success: function(data) {
+            datas = data;
+            getPages(1,5);
+          }
+        });
+    });
+
+    //用于页码跳转方法
+    function jumPage(totalPage,psize){
+      var cpage=jQuery("#page_no").val();
+      if(0< cpage && cpage <= totalPage){
+        getPages(cpage,psize);
+      }
+      else{
+        alert("Out of range");
+      }
+    }
+
+
+    function getPages(pno,psize) {
+      var num;//分页总行数
+      var totalPage = 0;//分页总页数
+      var pageSize = psize;//分页每行显示数
+      var currentPage = pno;//当前页
+
+      num = parseInt(datas.length);//获取数据行数
+      if (num / pageSize > parseInt(num / pageSize)) {
+        totalPage = parseInt(num / pageSize) + 1;
+      } else {
+        totalPage = parseInt(num / pageSize);
+      }
+      var startRow = (currentPage - 1) * pageSize + 1;//开始显示的行
+      var endRow = currentPage * pageSize;//结束显示的行
+      endRow = (endRow > num) ? num : endRow;
+
+      var tbody = jQuery("#list_data>tbody");
+      tbody.empty();
+      jQuery.each(datas, function (i, n) {
+
+        var file = JSON.parse(n);
+        if (startRow <= parseInt(i + 1) && parseInt(i + 1) <= endRow) {
+          var row = createRow().appendTo(tbody);
+          //多选用，目前暂时未考虑
+          /*  createColumn().html("<input type='checkbox' id="+"fileId"+(i+1)+" name='fileId'/>").appendTo(row);*/
+          createColumn().text(i + 1).appendTo(row);
+          createColumn().text(file.name).appendTo(row);
+          createColumn().text(getSize(file.filesize)).appendTo(row);
+
+          var operationColumn = createColumn().appendTo(row);
+        }
+        //每次执行分页代码时需要将前一次分页的判断结果清空
+        jQuery("#last_page").removeAttr("onclick");
+        jQuery("#next_page").removeAttr("onclick");
+        //当前页非第一页时
+        if (currentPage > 1) {
+          jQuery("#last_page").attr("onclick", "getPages(" + (parseInt(currentPage) - 1) + "," + psize + ")");
+        }
+        //当前页小于总页数时
+        if (currentPage < totalPage) {
+          jQuery("#next_page").attr("onclick", "getPages(" + (parseInt(currentPage) + 1) + "," + psize + ")");
+
+        }
+        //显示当前页码、总页数及生成跳转点击事件
+        jQuery("#end_page").attr("onclick", "getPages(" + (totalPage) + "," + psize + ")");
+        jQuery("#first_page").attr("onclick", "getPages(" + (1) + "," + psize + ")");
+        jQuery("#jump_page").attr("onclick", "jumPage(" + (totalPage) + "," + psize + ")");
+        jQuery("#total_page").val("/" + totalPage + " 页");
+        jQuery("#page_no").val(currentPage);
+        var btnDownload = jQuery("<button class='btn_download'>下载</button>");
+        var btnDelete = jQuery("<button class='btn_delete'>删除</button>");
+
+        //批量删除获取文件信息用，目前暂时不用
+        /*jQuery("#"+"fileId"+(i+1)).attr("recordQuery",JSON.stringify(recordQuery));*/
+
+
+        btnDownload.click(function () {
+          location.href = "/download?filename=" + file.name;
+        });
+
+        btnDelete.click(function () {
+          recordQuery = jQuery(this).attr("data-record-query");
+          var dialogDiv = jQuery("<div></div>");
+          dialogDiv.dialog({
+            autoOpen: false,
+            modal: true,
+            width: 500,
+            position: {my: "center", at: "center", of: jQuery(".content_wrapper_hidden")},
+            title: "文件删除",
+            buttons: [
+              {
+                text: "确认",
+              click: function () {
+
+            jQuery.post("/delete", file.name, function (data) {
+                location.reload();
+            });
+
+            jQuery(this).dialog("close");
+          }
+        },
+          {
+            text: "取消",
+                  click: function () {
+            jQuery(this).dialog("close");
+          }
+          }
+          ]
+        });
+
+          var text = "确认删除 "+ file.name + "?";
+
+          dialogDiv.text(text).dialog("open");
+
+        });
+
+        btnDownload.appendTo(operationColumn);
+        btnDelete.appendTo(operationColumn);
+
+      });
+      jQuery(".btn_download,.btn_delete").button();
+    }
+
+
+
+
+    function getSize(length) {
+      var len, unit;
+      if (length == 0) {
+        len = 0;
+        unit = "B";
+
+      } else if (length < 1024) {
+        len = length;
+        unit = "B";
+      } else if (length < (1024 * 1024)) {
+        len = (length / 1024);
+        unit = "KB";
+      } else {
+        len = (length / 1024 / 1024);
+        unit = "MB";
+      }
+      return new Number(len).toFixed(2) + unit;
+    }
+  </script>
+  <style>
+
+    .data tbody tr td:first-child{
+      font-weight:bold;
+      cursor: pointer;
+    }
+
+  </style>
+    <body>
+    <div class="main_wrapper">
+      <div class="content_wrapper_hidden">
+        <div class="ui_wrapper">
+     <table id="list_data" class="data" border="0" cellspacing="0" cellpadding="0" style="width: 100%">
+       <thead>
+       <tr>
+         <th >Num</th>
+         <th >Files</th>
+         <th >Size</th>
+         <th >Operation</th>
+       </tr>
+       </thead>
+       <tbody>
+       </tbody>
+     </table>
+
+         <!-- 分页用按钮-->
+         <table class="ui-corner-all grey" style="width: 100%">
+           <tbody align="center" valign="middle">
+           <tr><td><div id="pagination">
+<!-- 全选和批量删除按钮，目前暂时未考虑-->
+<!--<input type="button" id='fileIds' style="background: -moz-linear-gradient(top,#ffffff,#e6e6e6);border-color:#c5c5c5" value="全选"/><input type="button" id='delete_fileIds' style="background: -moz-linear-gradient(top,#ffffff,#e6e6e6);border-color:#c5c5c5" value="删除"/>-->
+             <input type="button" id='first_page' style="background: -moz-linear-gradient(top,#ffffff,#e6e6e6);border-color:#c5c5c5" value="首页"/><input type="button" style="background: -moz-linear-gradient(top,#ffffff,#e6e6e6);border-color:#c5c5c5" id='last_page' value="上一页"/><input type="button" id='next_page' style="background: -moz-linear-gradient(top,#ffffff,#e6e6e6);border-color:#c5c5c5" value="下一页"/><input type="button" style="background: -moz-linear-gradient(top,#ffffff,#e6e6e6);border-color:#c5c5c5" id='end_page' value="尾页"/><input type="button" style="background: -moz-linear-gradient(top,#ffffff,#e6e6e6);border-color:#c5c5c5" id='jump_page' value="跳转"/>
+             <input  autocomplete="off" class="ui-autocomplete-input" id="page_no" style="height: 20px;width:30px"/><input type="button" style="background: -moz-linear-gradient(top,#ffffff,#e6e6e6);border: none" id='total_page'  value="0 页" /></div></td></tr>
+           </tbody>
+         </table>
+        <!-- 分页用按钮-->
+         </div>
+     </div>
+      </div>
+  </body>
+</html>
